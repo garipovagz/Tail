@@ -1,5 +1,5 @@
 text1.txt
 шо
 text2.txt
-тт
+ва
 

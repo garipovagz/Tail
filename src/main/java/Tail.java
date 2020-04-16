@@ -32,23 +32,22 @@ public class Tail {
         StringBuilder res = new StringBuilder();
         if (files.isEmpty()) {
             Scanner inn = new Scanner(System.in);
-            String in = inn.next();
             System.out.println("Enter input file name, please");
-            writer(outFile, extract(in));
+            writer(outFile, extract(inn));
         }
         if (files.size() == 1) {
-            res.append(extract(files.get(0)));
+            res.append(extract(readFile(files.get(0))));
         }else for (String file : files) {
             File f =  new File(file);
             res.append(f.getName());
             res.append("\n");
-            res.append(extract(file));
+            res.append(extract(readFile(file)));
         }
         if (outFile == null) {
             System.out.println(res.toString());
         }else writer(outFile, res.toString());
         }
-    private String extract (String file) throws IOException {
+    private String extract (Scanner file ) throws IOException {
         String result = "" ;
         if (countLines == 0 && countSymbols == 0) {
             countLines = 10;
@@ -64,8 +63,7 @@ public class Tail {
         }
         return result;
     }
-    private String extrl (String file) throws FileNotFoundException {
-        Scanner scan = new Scanner(readFile(file));
+    private String extrl (Scanner scan) throws FileNotFoundException {
         StringBuilder res = new StringBuilder();
         List<String> l = new ArrayList<>();
         while (scan.hasNext()) {
@@ -77,8 +75,7 @@ public class Tail {
         }
         return res.toString();
     }
-    private String extractSymbols(String file) throws IOException {
-        Scanner scan = new Scanner(readFile(file));
+    private String extractSymbols(Scanner scan ) throws IOException {
         StringBuilder res = new StringBuilder();
         while (scan.hasNext()) {
             res.append(scan.next());
@@ -87,9 +84,10 @@ public class Tail {
         res.append("\n");
         return res.toString();
     }
-    private BufferedReader readFile (String file) throws FileNotFoundException {
+    private Scanner readFile (String file) throws FileNotFoundException {
         BufferedReader input = new BufferedReader(new FileReader(file));
-        return input;
+        Scanner scan = new Scanner(input);
+        return scan;
     }
     private void writer(File file, String text) throws IOException {
         FileWriter writer = new FileWriter(file);

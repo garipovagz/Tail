@@ -28,18 +28,6 @@ private void AssertFileContent ( String out, String expectedOut) throws FileNotF
         AssertFileContent( "src/files/expected2.txt" , "src/files/out2.txt");
     }
     @Test
-    public void main3() throws IOException {
-        String [] args = {"-n", "2", "src/files/text1.txt" , "src/files/text2.txt" };
-        Tail.main(args);
-        AssertFileContent( "src/files/expected1.txt" , "src/files/out1.txt");
-    }
-    @Test
-    public void main2() throws IOException {
-        String [] args = {"-n", "1", "src/files/text1.txt" };
-        Tail.main(args);
-        AssertFileContent( "src/files/expected3.txt" , "src/files/out1.txt");
-    }
-    @Test
     public void main1() throws IOException {
         String [] args = {"-c", "5", "-o", "src/files/out1.txt", "src/files/text2.txt" };
         Tail.main(args);
