@@ -1,9 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="jar" name="Task2 .Console:jar">
-    <output-path>$PROJECT_DIR$/out/artifacts/Task2__Console_jar</output-path>
-    <root id="archive" name="Task2 .Console.jar">
-      <element id="module-output" name="Task2 .Console" />
-      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/args4j/args4j/2.33/args4j-2.33.jar" path-in-jar="/" />
-    </root>
-  </artifact>
-</component>
