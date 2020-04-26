@@ -7,22 +7,19 @@ import org.kohsuke.args4j.Option;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
 
 public class Tail {
     @Argument (usage = "files")
-    private List<String> files ;
+    private List<String> files;
     @Option(name = "-c", forbids = "-n", usage = "countS")
     private int countSymbols;
     @Option(name = "-n", forbids = "-c", usage = "countL")
     private int countLines;
     @Option(name = "-o", usage = "outFile")
     private File outFile;
-
-    public Tail() {
-    }
-
     public static void main(String[] args)  {
         new Tail().launch(args);
     }
@@ -34,22 +31,14 @@ public class Tail {
             System.err.println(e.getMessage());
             System.err.println("java -jar com.g.Tail.jar [-c num|-n num] [-o ofile] file0 file1 file2...");
             parser.printUsage(System.out);
-            return;
+        }
+        StringBuilder res = new StringBuilder();
+        if (files.size() == 0){
+            System.out.println("Enter your text, please");
+            Scanner inn = new Scanner(System.in);
+            res.append(extract(inn));
         }
         try {
-            StringBuilder res = new StringBuilder();
-            for (String f : files) {
-                if (f == null) {
-                    System.out.println("Enter your text, please");
-                    Scanner inn = new Scanner(System.in);
-                    res.append(extract(inn));
-                }
-            }
-            if (files.isEmpty()) {
-                System.out.println("Enter your text, please");
-                Scanner inn = new Scanner(System.in);
-                res.append(extract(inn));
-            }
             if (files.size() == 1) {
                 res.append(extract(readFile(files.get(0))));
             } else for (String file : files) {
